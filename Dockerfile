@@ -42,7 +42,7 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 RUN pip install requests runpod==1.7.10
 
 # Add RunPod Handler and Docker container start script
-COPY start.sh handler.py ./
+COPY start.sh rp_handler.py ./
 
 # Add validation schemas
 COPY schemas /schemas
