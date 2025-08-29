@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_PREFER_BINARY=1 \
@@ -39,10 +39,10 @@ RUN apt update && \
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
 # Install Worker dependencies
-RUN pip install requests runpod
+RUN pip install requests runpod==1.7.10
 
 # Add RunPod Handler and Docker container start script
-COPY start.sh rp_handler.py ./
+COPY start.sh handler.py ./
 
 # Add validation schemas
 COPY schemas /schemas
@@ -52,4 +52,4 @@ COPY workflows /workflows
 
 # Start the container
 RUN chmod +x /start.sh
-CMD /start.sh
+ENTRYPOINT /start.sh
